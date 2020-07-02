@@ -1,0 +1,10 @@
+=== Necessary components for Jenkins integration with Github and Docker ===
+
+. The following Jenkins plugins need to be installed
+- Docker, Docker Pipeline
+
+
+. A webhook on GitHub pointing to the URL of your Jenkins server
+
+
+. If you're using localhost for Jenkins, then a direct connection between GitHub and your local machine isn't possible by default due to your firewall. Instead, you will need to use a proxy like serveo or ngrok (serveo is more convenient since it requires no setup, but it seems like the proxy can only run for a limited amount of time). The proxy server needs to be running in order for builds to be triggered in Jenkins. 
