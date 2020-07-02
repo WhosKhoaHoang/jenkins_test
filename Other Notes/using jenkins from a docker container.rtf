@@ -7,7 +7,7 @@
 \pard\pardeftab720\partightenfactor0
 
 \f0\fs26 \cf2 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 To overcome the issue of \'93docker not found\'94, docker needed to be a program that could be executed within the container. You could accomplish that in the following ways:\
+To overcome the issue of \'93docker not found\'94, docker needed to be a program that could be executed within the container. You could accomplish that in the following ways:\
 \
 . With volumes (or bind mounts?) \
 . Install docker directly from the container.\
@@ -28,10 +28,8 @@ docker exec -it -u root jenkins-local bash\
 \
 I was always using:\
 \
-\pard\pardeftab720\partightenfactor0
-\cf2 \outl0\strokewidth0 docker exec -it bash\
-\pard\pardeftab720\partightenfactor0
-\cf2 \outl0\strokewidth0 \
+docker exec -it bash\
+\
 which dropped me into the container as the user jenkins...\
 \
 \
@@ -40,4 +38,6 @@ which dropped me into the container as the user jenkins...\
 Useful links:\
 https://rangle.io/blog/running-jenkins-and-persisting-state-locally-using-docker-2/\
 https://stackoverflow.com/questions/56827949/jenkins-dial-unix-var-run-docker-sock-connect-permission-denied-macos\
-https://stackoverflow.com/questions/47854463/docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socke}
+https://stackoverflow.com/questions/47854463/docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socke\
+https://tutorials.releaseworksacademy.com/learn/the-simple-way-to-run-docker-in-docker-for-ci\
+https://docs.docker.com/engine/install/ubuntu/}
