@@ -1,0 +1,43 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww14980\viewh12100\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 To overcome the issue of \'93docker not found\'94, docker needed to be a program that could be executed within the container. You could accomplish that in the following ways:\
+\
+. With volumes (or bind mounts?) \
+. Install docker directly from the container.\
+\
+You decided to go with the first option. The command associated with that was this:\
+\
+docker container run -d -p 8080:8080 \\\
+    -v jenkinsvol1:/var/jenkins_home \\\
+    -v $(which docker):/usr/bin/docker \\             # Volume. Docker client\
+    -v /var/run/docker.sock:/var/run/docker.sock \\   # Volume. Docker socket\
+    --name jenkins-local \\\
+    jenkins/jenkins:lts\
+\
+\
+You also added jenkins user to root (usermod -aG root jenkins) due to permission errors with accessing docker.sock. This probably wasn\'92t the best security practice. It might be better to add jenkins to the docker group; however, my jenkins container didn\'92t have a docker group because the volume option doesn\'92t seem to create a docker group (and even when you did create a docker group and added jenkins to it, things still weren\'92t working). I actually tried installing docker directly from the container, but it wasn\'92t working (permission denied errors)...but come to think of it, I might not have used:\
+\
+docker exec -it -u root jenkins-local bash\
+\
+I was always using:\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \outl0\strokewidth0 docker exec -it bash\
+\pard\pardeftab720\partightenfactor0
+\cf2 \outl0\strokewidth0 \
+which dropped me into the container as the user jenkins...\
+\
+\
+\
+\
+Useful links:\
+https://rangle.io/blog/running-jenkins-and-persisting-state-locally-using-docker-2/\
+https://stackoverflow.com/questions/56827949/jenkins-dial-unix-var-run-docker-sock-connect-permission-denied-macos\
+https://stackoverflow.com/questions/47854463/docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socke}
